@@ -38,19 +38,14 @@ function Pan (targetElement) {
             changeX = eventPosition.x - dragStartX,
             changeY = eventPosition.y - dragStartY;
 
-        //console.log(changeX, changeY);
-
-        //if (eventPosition.x === 0 && eventPosition.y === 0) {
-        //    eventPosition.x = lastDragX;
-        //    eventPosition.y = lastDragY;
-        //}
-
-        console.log(dragStartSubject.x, dragStartSubject.y);
+        if (lastDragX == eventPosition.x && lastDragY == eventPosition.y) {
+            return;
+        }
 
         pan.translate(changeX, changeY, handle, targetElement);
 
-        //lastDragX = eventPosition.x;
-        //lastDragY = eventPosition.y;
+        lastDragX = eventPosition.x;
+        lastDragY = eventPosition.y;
     };
 
     dragEnd = function (e) {
