@@ -17,18 +17,12 @@ gulp.task('clean', ['lint'], function (cb) {
 
 gulp.task('bundle', ['clean'], function () {
     return gulp
-        .src('./src/swing.js')
+        .src('./src/pan.js')
         .pipe(browserify({
             //debug : true
         }))
         .pipe(gulp.dest('./dist/'));
 });
-
-/*gulp.task('distribute', ['clean'], function () {
-    return gulp
-        .src('./src/swing.js')
-        .pipe(gulp.dest('./dist/'));
-});*/
 
 gulp.task('watch', function () {
     gulp.watch(['./src/*', './package.json'], ['default']);

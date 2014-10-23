@@ -1,6 +1,6 @@
 {
   "name": "pan",
-  "description": "",
+  "description": "Touch enabled implementation of WHATWG drag and drop mechanism.",
   "version": "1.0.0",
   "browser": "dist/pan.min.js",
   "author": "Gajus Kuizinas <gk@anuary.com>",
