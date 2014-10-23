@@ -55,7 +55,7 @@ function Pan (targetElement) {
     dragEnd = function (e) {
         this.style.opacity = 1;
 
-        //handle.parentNode.removeChild(handle);
+        handle.parentNode.removeChild(handle);
     };
 
     targetElement.addEventListener('dragstart', dragStart);
@@ -123,26 +123,9 @@ Pan.prototype.makeClone = function (node) {
 
     clone = node.cloneNode(true);
 
-    this.styleClone(clone, node.offsetWidth, node.offsetHeight);
-
     node.parentNode.insertBefore(clone, node);
 
     return clone;
-};
-
-/**
- * Make clone width and height static.
- * Take clone out of the element flow.
- *
- * @param {HTMLElement} node
- * @param {Number} width
- * @param {Nubmer} height
- */
-Pan.prototype.styleClone = function (node, width, height) {
-    node.style.position = 'fixed';
-    node.style.zIndex = 9999;
-    node.style.width = width + 'px';
-    node.style.height = height + 'px';
 };
 
 /**
