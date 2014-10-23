@@ -1,0 +1,18 @@
+{
+  "name": "pan",
+  "description": "",
+  "version": "1.0.0",
+  "browser": "dist/pan.min.js",
+  "author": "Gajus Kuizinas <gk@anuary.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gajus/pan"
+  },
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "gulp": "^3.8.9",
+    "gulp-jshint": "^1.8.5",
+    "gulp-browserify": "^0.5.0",
+    "del": "^0.1.3"
+  }
+}
