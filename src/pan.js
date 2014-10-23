@@ -2,7 +2,7 @@
  *
  */
 function Pan (targetElement) {
-    var dative = this,
+    var pan = this,
         handle,
         dragClickOffsetX,
         dragClickOffsetY,
@@ -17,38 +17,39 @@ function Pan (targetElement) {
 
     targetElement.draggable = true;
 
-    dative.styleHandle(targetElement);
+    pan.styleHandle(targetElement);
     
     dragStart = function (e) {
-        var useX = e.touches ? e.touches[0].pageX : e.pageX,
-            useY = e.touches ? e.touches[0].pageY : e.pageY;
+        var eventPosition = pan.getEventPosition(e);
 
         dragStartSubject = pan.getElementOffset(targetElement);
 
-        handle = dative.makeHandle(targetElement);
+        handle = pan.makeHandle(targetElement);
 
-        dragStartX = useX;
-        dragStartY = useY;
+        dragStartX = eventPosition.x;
+        dragStartY = eventPosition.y;
         
         this.style.opacity = 0;
     };
     
     dragMove = function (e) {
-        var useX = e.touches ? e.touches[0].pageX : e.pageX,
-            useY = e.touches ? e.touches[0].pageY : e.pageY;
+        var eventPosition = pan.getEventPosition(e),
+            changeX = eventPosition.x - dragStartX,
+            changeY = eventPosition.y - dragStartY;
 
-        if (useX === 0 && useY === 0) {
-            useX = lastDragX;
-            useY = lastDragY;
-        }
+        //console.log(changeX, changeY);
 
-        dative.translate(
-            dragStartSubject.x + useX - dragStartX,
-            dragStartSubject.y + useY - dragStartY,
-        handle, targetElement);
+        //if (eventPosition.x === 0 && eventPosition.y === 0) {
+        //    eventPosition.x = lastDragX;
+        //    eventPosition.y = lastDragY;
+        //}
 
-        lastDragX = useX;
-        lastDragY = useY;
+        console.log(dragStartSubject.x, dragStartSubject.y);
+
+        pan.translate(changeX, changeY, handle, targetElement);
+
+        //lastDragX = eventPosition.x;
+        //lastDragY = eventPosition.y;
     };
 
     dragEnd = function (e) {
@@ -72,7 +73,16 @@ function Pan (targetElement) {
     document.body.addEventListener('drop');
 }
 
-Pan.prototype.getEventCoordinates
+/**
+ * @param {object}
+ * @return {object}
+ */
+Pan.prototype.getEventPosition = function (event) {
+    return {
+        x: event.touches ? event.touches[0].pageX : event.pageX,
+        y: event.touches ? event.touches[0].pageY : event.pageY
+    }
+};
 
 /**
  * @param {HTMLElement}
@@ -133,9 +143,6 @@ Pan.prototype.styleClone = function (node, width, height) {
     node.style.zIndex = 9999;
     node.style.width = width + 'px';
     node.style.height = height + 'px';
-
-    node.style.margin = 0;
-    node.style.padding = 0;
 };
 
 /**

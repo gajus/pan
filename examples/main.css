@@ -20,11 +20,5 @@ body {
   position: absolute;
   left: 150px;
   top: 150px;
-  border-radius: 100%;
-  cursor: pointer; }
-  .target.static {
-    z-index: 10; }
-  .target.pan {
-    z-index: 30;
-    background: #f00;
-    top: 100px; }
+  cursor: pointer;
+  transform-origin: 0 0; }

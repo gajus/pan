@@ -14,13 +14,5 @@ body {
 }
 
 .target {
-    width: 200px; height: 200px; background: #CF000F; position: absolute; left: 150px; top: 150px; border-radius: 100%; cursor: pointer;
-
-    &.static {
-        z-index: 10;
-    }
-
-    &.pan {
-        z-index: 30; background: #f00; top: 100px;
-    }
+    width: 200px; height: 200px; background: #CF000F; position: absolute; left: 150px; top: 150px; cursor: pointer; transform-origin: 0 0;
 }
