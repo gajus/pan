@@ -38,6 +38,12 @@ function Pan (targetElement) {
             changeX = eventPosition.x - dragStartX,
             changeY = eventPosition.y - dragStartY;
 
+        // Outside screen.
+        if (eventPosition.x === document.documentElement.scrollLeft && document.documentElement.scrollTop === eventPosition.y) {
+            return;
+        }
+
+        // Position did not update.
         if (lastDragX == eventPosition.x && lastDragY == eventPosition.y) {
             return;
         }
