@@ -13,27 +13,22 @@ var targetElement,
 targetElement = document.querySelector('#target-element');
 pan new Pan(targetElement);
 
-pan.emitter.on('start', function (e) {
+pan.eventEmitter.on('start', function (e) {
     console.log(e);
 });
 
-pan.emitter.on('move', function (e) {
+pan.eventEmitter.on('move', function (e) {
     e.handle.style.transform = 'translate(' + e.offsetX + 'px,' + e.offsetY + 'px)';
 });
 
-pan.emitter.on('end', function (e) {
+pan.eventEmitter.on('end', function (e) {
     console.log(e);
 });
 ```
 
 This will make the `#target-element` element draggable using CSS3 transformations.
 
-## Location Translator
-
-The above will generate a table of contents for all of the headings in the document. Table of contents is an (<ol>) element; it will be appended to #contents container (See Markup).
-
-The result of the gajus.contents() is an object with list (the generated <ol> element) and eventProxy properties.
-
+The result of `Pan()` is an object with a single property `eventEmitter` used for [events](#events).
 
 ## Examples
 

@@ -17,7 +17,7 @@ function Pan (targetElement) {
 }
 
 Pan.prototype.bind = function (targetElement) {
-    var emitter = new Sister(),
+    var eventEmitter = new Sister(),
         pan = this,
         handle,
         lastDragX,
@@ -61,7 +61,7 @@ Pan.prototype.bind = function (targetElement) {
 
             firstMove = false;
 
-            emitter.trigger('start', {
+            eventEmitter.trigger('start', {
                 type: 'start',
                 offsetX: offsetX,
                 offsetY: offsetY,
@@ -83,7 +83,7 @@ Pan.prototype.bind = function (targetElement) {
         lastDragX = eventPosition.x;
         lastDragY = eventPosition.y;
 
-        emitter.trigger('move', {
+        eventEmitter.trigger('move', {
             type: 'move',
             offsetX: offsetX,
             offsetY: offsetY,
@@ -102,7 +102,7 @@ Pan.prototype.bind = function (targetElement) {
 
         handle.parentNode.removeChild(handle);
 
-        emitter.trigger('end', {
+        eventEmitter.trigger('end', {
             type: 'end',
             offsetX: offsetX,
             offsetY: offsetY,
@@ -125,7 +125,7 @@ Pan.prototype.bind = function (targetElement) {
 
     document.body.addEventListener('drop');
 
-    return emitter;
+    return eventEmitter;
 };
 
 /**
