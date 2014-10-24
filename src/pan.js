@@ -1,41 +1,74 @@
+var Sister = require('sister');
+
 /**
- *
+ * @param {HTMLElement} targetElement
  */
 function Pan (targetElement) {
     var pan = this,
+        emitter;
+
+    targetElement.draggable = true;
+    
+    emitter = pan.bind(targetElement);
+
+    return {
+        emitter: emitter
+    }
+}
+
+Pan.prototype.bind = function (targetElement) {
+    var emitter = new Sister(),
+        pan = this,
         handle,
-        dragClickOffsetX,
-        dragClickOffsetY,
         lastDragX,
         lastDragY,
-        dragStartSubject,
+        dragStartSubjectDisplay,
+        dragStartSubjectOpacity,
         dragStartX,
         dragStartY,
         dragStart,
         dragMove,
-        dragEndt;
+        dragEndt,
+        firstMove;
 
-    targetElement.draggable = true;
-
-    pan.styleHandle(targetElement);
-    
     dragStart = function (e) {
         var eventPosition = pan.getEventPosition(e);
 
-        dragStartSubject = pan.getElementOffset(targetElement);
+        dragStartSubjectDisplay = targetElement.style.display;
+        dragStartSubjectOpacity = targetElement.style.opacity;
 
         handle = pan.makeHandle(targetElement);
 
+        targetElement.style.opacity = 0;
+        
         dragStartX = eventPosition.x;
         dragStartY = eventPosition.y;
-        
-        this.style.opacity = 0;
+
+        firstMove = true;
     };
     
     dragMove = function (e) {
         var eventPosition = pan.getEventPosition(e),
-            changeX = eventPosition.x - dragStartX,
-            changeY = eventPosition.y - dragStartY;
+            offsetX = eventPosition.x - dragStartX,
+            offsetY = eventPosition.y - dragStartY;
+
+        if (firstMove) {
+            // Manipulating (hiding) the targetElement on dragStart is
+            // causing instant dragEnd.
+
+            targetElement.parentNode.insertBefore(handle, targetElement);
+            targetElement.style.display = 'none';
+
+            firstMove = false;
+
+            emitter.trigger('start', {
+                type: 'start',
+                offsetX: offsetX,
+                offsetY: offsetY,
+                target: targetElement,
+                handle: handle
+            });
+        }
 
         // Outside screen.
         if (eventPosition.x === document.documentElement.scrollLeft && document.documentElement.scrollTop === eventPosition.y) {
@@ -47,16 +80,35 @@ function Pan (targetElement) {
             return;
         }
 
-        pan.translate(changeX, changeY, handle, targetElement);
-
         lastDragX = eventPosition.x;
         lastDragY = eventPosition.y;
+
+        emitter.trigger('move', {
+            type: 'move',
+            offsetX: offsetX,
+            offsetY: offsetY,
+            target: targetElement,
+            handle: handle
+        });
     };
 
     dragEnd = function (e) {
-        this.style.opacity = 1;
+        var eventPosition = pan.getEventPosition(e),
+            offsetX = eventPosition.x - dragStartX,
+            offsetY = eventPosition.y - dragStartY;
+        
+        targetElement.style.display = dragStartSubjectDisplay;
+        targetElement.style.opacity = dragStartSubjectOpacity;
 
         handle.parentNode.removeChild(handle);
+
+        emitter.trigger('end', {
+            type: 'end',
+            offsetX: offsetX,
+            offsetY: offsetY,
+            target: targetElement,
+            handle: handle
+        });
     };
 
     targetElement.addEventListener('dragstart', dragStart);
@@ -72,37 +124,21 @@ function Pan (targetElement) {
     });
 
     document.body.addEventListener('drop');
-}
+
+    return emitter;
+};
 
 /**
- * @param {object}
- * @return {object}
+ * Get the mouse cursor position or the first touch position.
+ * 
+ * @param {Object} event
+ * @return {Object}
  */
 Pan.prototype.getEventPosition = function (event) {
     return {
         x: event.touches ? event.touches[0].pageX : event.pageX,
         y: event.touches ? event.touches[0].pageY : event.pageY
-    }
-};
-
-/**
- * @param {HTMLElement}
- * @return {Object}
- */
-Pan.prototype.getElementOffset = function (element) {
-    var subjectRect = element.getBoundingClientRect();
-
-    return {
-        x: subjectRect.left + document.documentElement.scrollLeft,
-        y: dragStartSubjectY = subjectRect.top + document.documentElement.scrollTop
     };
-};
-
-/**
- * Prevent the text contents of the handle element from being selected.
- */
-Pan.prototype.styleHandle = function (node) {
-    node.style.userSelect = 'none';
 };
 
 /**
@@ -110,7 +146,9 @@ Pan.prototype.styleHandle = function (node) {
  * @return {HTMLElement}
  */
 Pan.prototype.makeHandle = function (targetElement) {
-    return this.makeClone(targetElement);
+    var handle = this.makeClone(targetElement);
+
+    return handle;
 };
 
 /**
@@ -124,21 +162,7 @@ Pan.prototype.makeClone = function (node) {
 
     clone = node.cloneNode(true);
 
-    node.parentNode.insertBefore(clone, node);
-
     return clone;
-};
-
-/**
- * Used to position the handle element.
- * 
- * @param {Number} x
- * @param {Number} y
- * @param {HTMLElement} handle
- * @parma {HTMLElement} targetElement
- */
-Pan.prototype.translate = function (x, y, handle, targetElement) {
-    handle.style.transform = 'translate(' + x + 'px,' + y + 'px)';
 };
 
 window.Pan = Pan;

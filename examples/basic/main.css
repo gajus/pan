@@ -1,0 +1,34 @@
+html, body, ul, li {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background: #1F3A93;
+  font: normal 16px/24px 'Helvetica Neue', Helvetica, Arial, freesans, sans-serif; }
+
+a {
+  color: #fff; }
+  a:hover {
+    color: #CF000F; }
+
+#viewport {
+  width: 500px;
+  height: 500px;
+  background: #fff;
+  margin: 100px auto;
+  position: relative;
+  border-radius: 100%;
+  overflow: hidden; }
+
+.target {
+  width: 200px;
+  height: 200px;
+  background: #CF000F;
+  margin: 150px 0 0 150px;
+  cursor: pointer;
+  -webkit-user-select: none; }
+
+#description, #source {
+  width: 500px;
+  margin: 20px auto;
+  color: #fff; }
