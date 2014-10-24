@@ -56,3 +56,22 @@ The code for all of the examples is in the [examples](./examples/) folder.
 | `target` | Target that received the event. |
 | `handle` | Element used to represent the target element when dragging. |
 | `type` | Event name. |
+
+## Download
+
+Using [Bower](http://bower.io/):
+
+```sh
+bower install pan
+```
+
+Using [NPM](https://www.npmjs.org/):
+
+```sh
+npm install pan
+```
+
+The old-fashioned way, download either of the following files:
+
+* https://raw.githubusercontent.com/gajus/pan/master/dist/pan.js
+* https://raw.githubusercontent.com/gajus/pan/master/dist/pan.min.js

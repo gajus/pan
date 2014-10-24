@@ -23,6 +23,7 @@ S.prototype.trigger = function (name, data) {
 };
 module.exports = S;
 },{}],2:[function(require,module,exports){
+(function (global){
 var Sister = require('sister');
 
 /**
@@ -35,7 +36,7 @@ function Pan (targetElement) {
 
     return {
         eventEmitter: pan.bind(targetElement)
-    }
+    };
 }
 
 Pan.prototype.bind = function (targetElement) {
@@ -187,5 +188,8 @@ Pan.prototype.makeClone = function (node) {
     return clone;
 };
 
-window.Pan = Pan;
+global.Pan = Pan;
+
+module.exports = Pan;
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"sister":1}]},{},[2])
