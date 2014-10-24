@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     targetElement = document.querySelector('.target');
     pan = new Pan(targetElement);
 
-    pan.emitter.on('move', function (e) {
+    pan.eventEmitter.on('move', function (e) {
         e.handle.style.transform = 'translate(' + e.offsetX + 'px,' + e.offsetY + 'px)';
     });
 }); 

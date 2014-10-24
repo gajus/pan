@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', function () {
     targetElement = document.querySelector('.target');
     pan = new Pan(targetElement);
 
-    pan.emitter.on('start', function (e) {
+    pan.eventEmitter.on('start', function (e) {
         console.log(e);
     });
 
-    pan.emitter.on('move', function (e) {
+    pan.eventEmitter.on('move', function (e) {
         console.log(e);
     });
 
-    pan.emitter.on('end', function (e) {
+    pan.eventEmitter.on('end', function (e) {
         console.log(e);
     });
 }); 
