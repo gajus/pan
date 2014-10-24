@@ -4,15 +4,12 @@ var Sister = require('sister');
  * @param {HTMLElement} targetElement
  */
 function Pan (targetElement) {
-    var pan = this,
-        emitter;
+    var pan = this;
 
     targetElement.draggable = true;
-    
-    emitter = pan.bind(targetElement);
 
     return {
-        emitter: emitter
+        eventEmitter: pan.bind(targetElement)
     }
 }
 
