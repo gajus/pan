@@ -2,7 +2,15 @@
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
-## Benefits
+## How Does It Work?
+
+```js
+new Pan(targetElement);
+```
+
+This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/html/master/editing.html#the-draggable-attribute) property and set an event listener for [dragstart](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragstart), [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-drag) and [dragend](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragend); it will also set an event listener for [touchstart](http://www.w3.org/TR/touch-events/#the-touchstart-event), [touchmove](http://www.w3.org/TR/touch-events/#the-touchmove-event) and [touchend](http://www.w3.org/TR/touch-events/#the-touchend-event). These events are re-emitted through the [`eventEmitter`](#events) and allow you to animate [handle](#handle) in response to drag/touch events.
+
+### Benefits
 
 * Access to all of the native events of the touch and drag.
 * native performance
@@ -35,15 +43,6 @@ This will make the `#target-element` element draggable using CSS3 transformation
 
 The result of `Pan()` is an object with a single property `eventEmitter` used for [events](#events).
 
-
-## How Does It Work?
-
-```js
-new Pan(targetElement);
-```
-
-This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/html/master/editing.html#the-draggable-attribute) property and set an event listener for [dragstart](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragstart), [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-drag) and [dragend](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragend); it will set an event listener for [touchstart](http://www.w3.org/TR/touch-events/#the-touchstart-event), [touchmove](http://www.w3.org/TR/touch-events/#the-touchmove-event) and [touchend](http://www.w3.org/TR/touch-events/#the-touchend-event).
-
 ## Examples
 
 * [Basic](http://gajus.com/sandbox/pan/examples/basic/)
@@ -55,13 +54,35 @@ The code for all of the examples is in the [examples](./examples/) folder.
 
 ## Events
 
-| Event | Description |
-| --- | --- |
-| `start` |  |
-| `move` |  |
-| `end` |  |
+You can listen for individual drag and touch [DOM events](#dom-events):
+
+```js
+targetElement.addEventListener('dragstart', dragStart);
+targetElement.addEventListener('drag', dragMove);
+targetElement.addEventListener('dragend', dragEnd);
+
+targetElement.addEventListener('touchstart', dragStart);
+targetElement.addEventListener('touchmove', dragMove);
+targetElement.addEventListener('touchend', dragEnd);
+```
+
+You can also use the [`eventEmitter`](#events) object that will translate drag and touch events to:
+
+```js
+pan.eventEmitter.on('start', dragStart);
+pan.eventEmitter.on('move', dragMove);
+pan.eventEmitter.on('end', dragEnd);
+```
 
 ### Event Object
+
+The listener of the `eventEmitter` is passed a single `eventObject` object.
+
+```js
+pan.eventEmitter.on('move', function (eventObject) {
+    
+});
+```
 
 | Name | Value |
 | --- | --- |
