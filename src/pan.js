@@ -37,6 +37,9 @@ Pan.prototype.bind = function (targetElement) {
         targetElement.style.opacity = 0;
 
         firstMove = true;
+
+        // Doesn't work without this in Firefox.
+        e.dataTransfer.setData('text/plain', 'node');
     };
     
     dragMove = function (e) {
@@ -94,19 +97,21 @@ Pan.prototype.bind = function (targetElement) {
         });
     };
 
-    targetElement.addEventListener('dragstart', dragStart);
-    targetElement.addEventListener('drag', dragMove);
-    targetElement.addEventListener('dragend', dragEnd);
+    targetElement.addEventListener('dragstart', dragStart, false);
+    //targetElement.addEventListener('drag', dragMove, false);
+    targetElement.addEventListener('dragend', dragEnd, false);
 
-    targetElement.addEventListener('touchstart', dragStart);
-    targetElement.addEventListener('touchmove', dragMove);
-    targetElement.addEventListener('touchend', dragEnd);
+    targetElement.addEventListener('touchstart', dragStart, false);
+    targetElement.addEventListener('touchmove', dragMove, false);
+    targetElement.addEventListener('touchend', dragEnd, false);
 
-    document.body.addEventListener('dragover', function (e) {
+    // @see http://stackoverflow.com/a/902352/368691
+    document.body.addEventListener('dragover', dragMove, false);
+
+    document.body.addEventListener('drop', function (e) {
+        e.stopPropagation();
         e.preventDefault();
-    });
-
-    document.body.addEventListener('drop');
+    }, false);
 
     return eventEmitter;
 };
