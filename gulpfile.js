@@ -41,7 +41,7 @@ gulp.task('version', ['bundle'], function () {
         .pipe(header('/**\n* @version <%= version %>\n* @link https://github.com/gajus/pan for the canonical source repository\n* @license https://github.com/gajus/pan/blob/master/LICENSE BSD 3-Clause\n*/\n', {version: pkg.version}))
         .pipe(gulp.dest('./dist/'));
 
-    bower.name = pkg.name;
+    //bower.name = pkg.name;
     bower.description = pkg.description;
     bower.version = pkg.version;
     bower.keywords = pkg.keywords;

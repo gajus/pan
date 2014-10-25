@@ -1,5 +1,5 @@
 {
-  "name": "pan",
+  "name": "pan-drag",
   "description": "Touch enabled implementation of WHATWG drag and drop mechanism.",
   "keywords": [
     "drag",
