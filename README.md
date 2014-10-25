@@ -1,5 +1,8 @@
 # Pan
 
+[![NPM version](https://badge.fury.io/js/pan.svg)](http://badge.fury.io/js/pan)
+[![Bower version](https://badge.fury.io/bo/pan.svg)](http://badge.fury.io/bo/pan)
+
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
 ## How Does It Work?
@@ -55,7 +58,7 @@ pan.eventEmitter.on('end', function (e) {
 
 This will make the `#target-element` element draggable using CSS3 transformations.
 
-The result of `Pan()` is an object with a single property `eventEmitter` used for [events](#events).
+The result of `Pan()` is an object with a single property (`eventEmitter`) used to emit [events](#events).
 
 ## Examples
 
@@ -80,7 +83,7 @@ targetElement.addEventListener('touchmove', dragMove);
 targetElement.addEventListener('touchend', dragEnd);
 ```
 
-You can also use the [`eventEmitter`](#events) object that will translate drag and touch events to:
+You can use the [`eventEmitter`](#events) object that will normalize drag and touch events to:
 
 ```js
 pan.eventEmitter.on('start', dragStart);
