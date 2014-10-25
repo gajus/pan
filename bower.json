@@ -1,3 +1,12 @@
 {
-  "name": "pan"
+    "name": "pan",
+    "description": "Touch enabled implementation of WHATWG drag and drop mechanism.",
+    "version": "1.0.0",
+    "keywords": [
+        "drag",
+        "touch",
+        "html",
+        "mobile"
+    ],
+    "license": "BSD-3-Clause"
 }
