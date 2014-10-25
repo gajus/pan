@@ -59,6 +59,7 @@ Pan.prototype.bind = function (targetElement) {
 
     dragStart = function (e) {
         positionTracker = pan.positionTracker(e);
+        position = positionTracker.update(e);
 
         dragStartSubjectDisplay = targetElement.style.display;
         dragStartSubjectOpacity = targetElement.style.opacity;
@@ -69,6 +70,14 @@ Pan.prototype.bind = function (targetElement) {
 
         firstMove = true;
 
+        eventEmitter.trigger('start', {
+            type: 'start',
+            offsetX: position.offsetX,
+            offsetY: position.offsetY,
+            target: targetElement,
+            handle: handle
+        });
+
         // Doesn't work without this in Firefox.
         e.dataTransfer.setData('text/plain', 'node');
     };
@@ -78,24 +87,6 @@ Pan.prototype.bind = function (targetElement) {
         e.preventDefault();
 
         position = positionTracker.update(e);
-
-        if (firstMove) {
-            // Manipulating (hiding) the targetElement on dragStart is
-            // causing instant dragEnd.
-
-            targetElement.parentNode.insertBefore(handle, targetElement);
-            targetElement.style.display = 'none';
-
-            firstMove = false;
-
-            eventEmitter.trigger('start', {
-                type: 'start',
-                offsetX: position.offsetX,
-                offsetY: position.offsetY,
-                target: targetElement,
-                handle: handle
-            });
-        }
 
         if (!position.isChange || position.isOutside) {
             return;
@@ -129,7 +120,17 @@ Pan.prototype.bind = function (targetElement) {
     };
 
     targetElement.addEventListener('dragstart', dragStart, false);
-    //targetElement.addEventListener('drag', dragMove, false);
+    targetElement.addEventListener('drag', function () {
+        if (firstMove) {
+            // Manipulating (hiding) the targetElement on dragStart is
+            // causing instant dragEnd.
+
+            targetElement.parentNode.insertBefore(handle, targetElement);
+            targetElement.style.display = 'none';
+
+            firstMove = false;
+        }
+    }, false);
     targetElement.addEventListener('dragend', dragEnd, false);
 
     targetElement.addEventListener('touchstart', dragStart, false);
