@@ -17,7 +17,7 @@ This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/ht
 
 ### Visual Feedback
 
-[HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd) spec does not define a method for styling or animating a method in response to the drag event, e.g. [there is no way to control element opacity while dragging](http://stackoverflow.com/questions/9712535/html5-drag-and-drop-no-transparency).
+[HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd) spec does not define a method for styling or animating the handle in response to the drag event, e.g. [there is no way to control element opacity while dragging](http://stackoverflow.com/questions/9712535/html5-drag-and-drop-no-transparency).
 
 To overcome this deficiency, Pan will listen for the `dragstart` event and perform this routine: 
 
