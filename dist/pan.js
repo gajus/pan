@@ -71,6 +71,9 @@ Pan.prototype.bind = function (targetElement) {
     };
     
     dragMove = function (e) {
+        // For mobile.
+        e.preventDefault();
+
         position = positionTracker.update(e);
 
         if (firstMove) {
@@ -105,6 +108,7 @@ Pan.prototype.bind = function (targetElement) {
     };
 
     dragEnd = function (e) {
+        // For mobile.
         e.preventDefault();
         
         targetElement.style.display = dragStartSubjectDisplay;
