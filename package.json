@@ -7,7 +7,7 @@
     "html",
     "mobile"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "browser": "dist/pan.min.js",
   "author": "Gajus Kuizinas <gk@anuary.com>",
   "repository": {

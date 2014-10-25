@@ -153,7 +153,7 @@ Pan.prototype.getEventPosition = function (event) {
     return {
         x: source.pageX,
         y: source.pageY
-    }
+    };
 };
 
 /**
