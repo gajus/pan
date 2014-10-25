@@ -17,19 +17,20 @@ Pan.prototype.bind = function (targetElement) {
     var eventEmitter = new Sister(),
         pan = this,
         handle,
+        positionTracker,
+
+
         lastDragX,
         lastDragY,
         dragStartSubjectDisplay,
         dragStartSubjectOpacity,
-        dragStartX,
-        dragStartY,
         dragStart,
         dragMove,
         dragEndt,
         firstMove;
 
     dragStart = function (e) {
-        var eventPosition = pan.getEventPosition(e);
+        positionTracker = pan.positionTracker(e);
 
         dragStartSubjectDisplay = targetElement.style.display;
         dragStartSubjectOpacity = targetElement.style.opacity;
@@ -37,17 +38,12 @@ Pan.prototype.bind = function (targetElement) {
         handle = pan.makeHandle(targetElement);
 
         targetElement.style.opacity = 0;
-        
-        dragStartX = eventPosition.x;
-        dragStartY = eventPosition.y;
 
         firstMove = true;
     };
     
     dragMove = function (e) {
-        var eventPosition = pan.getEventPosition(e),
-            offsetX = eventPosition.x - dragStartX,
-            offsetY = eventPosition.y - dragStartY;
+        var position = positionTracker.update(e);
 
         if (firstMove) {
             // Manipulating (hiding) the targetElement on dragStart is
@@ -60,39 +56,28 @@ Pan.prototype.bind = function (targetElement) {
 
             eventEmitter.trigger('start', {
                 type: 'start',
-                offsetX: offsetX,
-                offsetY: offsetY,
+                offsetX: position.offsetX,
+                offsetY: position.offsetY,
                 target: targetElement,
                 handle: handle
             });
         }
 
-        // Outside screen.
-        if (eventPosition.x === document.documentElement.scrollLeft && document.documentElement.scrollTop === eventPosition.y) {
+        if (!position.isChange || position.isOutside) {
             return;
         }
-
-        // Position did not update.
-        if (lastDragX == eventPosition.x && lastDragY == eventPosition.y) {
-            return;
-        }
-
-        lastDragX = eventPosition.x;
-        lastDragY = eventPosition.y;
 
         eventEmitter.trigger('move', {
             type: 'move',
-            offsetX: offsetX,
-            offsetY: offsetY,
+            offsetX: position.offsetX,
+            offsetY: position.offsetY,
             target: targetElement,
             handle: handle
         });
     };
 
     dragEnd = function (e) {
-        var eventPosition = pan.getEventPosition(e),
-            offsetX = eventPosition.x - dragStartX,
-            offsetY = eventPosition.y - dragStartY;
+        var position = positionTracker.update(e);
         
         targetElement.style.display = dragStartSubjectDisplay;
         targetElement.style.opacity = dragStartSubjectOpacity;
@@ -101,8 +86,8 @@ Pan.prototype.bind = function (targetElement) {
 
         eventEmitter.trigger('end', {
             type: 'end',
-            offsetX: offsetX,
-            offsetY: offsetY,
+            offsetX: position.offsetX,
+            offsetY: position.offsetY,
             target: targetElement,
             handle: handle
         });
@@ -132,9 +117,47 @@ Pan.prototype.bind = function (targetElement) {
  * @return {Object}
  */
 Pan.prototype.getEventPosition = function (event) {
+    var source = event.touches ? event.touches[0] : event;
+
     return {
-        x: event.touches ? event.touches[0].pageX : event.pageX,
-        y: event.touches ? event.touches[0].pageY : event.pageY
+        x: source.pageX,
+        y: source.pageY
+    }
+};
+
+/**
+ * Position tracker receives the first event and uses to produce an offset calculator.
+ */
+Pan.prototype.positionTracker = function (startEvent) {
+    var pan = this,
+        pt = {},
+        eventPosition = pan.getEventPosition(startEvent),
+        lastPageX = eventPosition.x,
+        lastPageY = eventPosition.y;
+
+    pt.dragStartX = eventPosition.x;
+    pt.dragStartY = eventPosition.y;
+
+    return {
+        update: function (event) {
+            var eventPosition = pan.getEventPosition(event);
+
+            pt.pageX = eventPosition.x;
+            pt.pageY = eventPosition.y;
+
+            pt.offsetX = eventPosition.x - pt.dragStartX;
+            pt.offsetY = eventPosition.y - pt.dragStartY;
+
+            // Is the cursor outside the screen?
+            pt.isOutside = pt.pageX == document.documentElement.scrollLeft && pt.pageY == document.documentElement.scrollTop;
+            // Did the cursor position change?
+            pt.isChange = lastPageX != eventPosition.x || lastPageY != eventPosition.y;
+
+            lastPageX = eventPosition.x;
+            lastPageY = eventPosition.y;
+
+            return pt;
+        }
     };
 };
 
