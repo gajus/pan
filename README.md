@@ -11,7 +11,7 @@ Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag
     - [Visual Feedback](#visual-feedback)
     - [Benefits](#benefits)
 - [Quick Start](#quick-start)
-- [Examples](#examples)
+    - [Examples](#examples)
 - [Events](#events)
     - [Event Object](#event-object)
 - [Download](#download)
@@ -73,9 +73,9 @@ This will make the `#target-element` element draggable using CSS3 transformation
 
 The result of `Pan()` is an object with a single property (`eventEmitter`) used to emit [events](#events).
 
-## Examples
+### Examples
 
-* [Basic](http://gajus.com/sandbox/pan/examples/basic/)
+* [Basic](http://gajus.com/sandbox/pan/examples/basic/) element dragging using CSS transformations.
 * [Events](http://gajus.com/sandbox/pan/examples/events/) logged in the `console.log`.
 
 The code for all of the examples is in the [examples](./examples/) folder.
