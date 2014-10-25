@@ -2,6 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/pan-drag.svg)](http://badge.fury.io/js/pan-drag)
 [![Bower version](https://badge.fury.io/bo/pan.svg?)](http://badge.fury.io/bo/pan)
+[![Tweet Button](./.readme/tweet-button.png)](https://twitter.com/intent/retweet?tweet_id=526041204044353539)
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
