@@ -8,12 +8,26 @@ Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag
 new Pan(targetElement);
 ```
 
-This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/html/master/editing.html#the-draggable-attribute) property and set an event listener for [dragstart](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragstart), [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-drag) and [dragend](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragend); it will also set an event listener for [touchstart](http://www.w3.org/TR/touch-events/#the-touchstart-event), [touchmove](http://www.w3.org/TR/touch-events/#the-touchmove-event) and [touchend](http://www.w3.org/TR/touch-events/#the-touchend-event). These events are re-emitted through the [`eventEmitter`](#events) and allow you to animate [handle](#handle) in response to drag/touch events.
+This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/html/master/editing.html#the-draggable-attribute) property and set an event listener for [dragstart](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragstart), [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-drag) and [dragend](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragend); it will also set an event listener for [touchstart](http://www.w3.org/TR/touch-events/#the-touchstart-event), [touchmove](http://www.w3.org/TR/touch-events/#the-touchmove-event) and [touchend](http://www.w3.org/TR/touch-events/#the-touchend-event). These events are re-emitted through the [`eventEmitter`](#events) and allow you to animate [handle](#visual-feedback) in response to drag/touch events.
+
+### Visual Feedback
+
+[HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd) spec does not define a method for styling or animating a method in response to the drag event, e.g. [there is no way to control element opacity while dragging](http://stackoverflow.com/questions/9712535/html5-drag-and-drop-no-transparency).
+
+To overcome this deficiency, Pan will listen for the `dragstart` event and perform this routine: 
+
+1. Hide the element that is being dragged.
+2. Make a clone (handle) of the element that is being dragged.
+3. Put the clone in place of the element that is being dragged.
+
+As a result, you have full control over the visual feedback.
+
+There is a reference to the `handle` element in the [Event Object](#event-object).
 
 ### Benefits
 
-* Access to all of the native events of the touch and drag.
-* native performance
+* Access to all of the DOM events for [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#dndevents) and [touch](http://www.w3.org/TR/touch-events/#list-of-touchevent-types).
+* Lightweight and performs good.
 
 ## Quick Start
 
