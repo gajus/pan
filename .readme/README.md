@@ -122,7 +122,7 @@ bower install pan
 Using [NPM](https://www.npmjs.org/):
 
 ```sh
-npm install pan
+npm install pan-drag
 ```
 
 The old-fashioned way, download either of the following files:
