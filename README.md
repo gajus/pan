@@ -1,6 +1,11 @@
 # Pan
 
-Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop mechanism.
+Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
+
+## Benefits
+
+* Access to all of the native events of the touch and drag.
+* native performance
 
 ## Quick Start
 
@@ -29,6 +34,15 @@ pan.eventEmitter.on('end', function (e) {
 This will make the `#target-element` element draggable using CSS3 transformations.
 
 The result of `Pan()` is an object with a single property `eventEmitter` used for [events](#events).
+
+
+## How Does It Work?
+
+```js
+new Pan(targetElement);
+```
+
+This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/html/master/editing.html#the-draggable-attribute) property and set an event listener for [dragstart](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragstart), [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-drag) and [dragend](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragend); it will set an event listener for [touchstart](http://www.w3.org/TR/touch-events/#the-touchstart-event), [touchmove](http://www.w3.org/TR/touch-events/#the-touchmove-event) and [touchend](http://www.w3.org/TR/touch-events/#the-touchend-event).
 
 ## Examples
 
