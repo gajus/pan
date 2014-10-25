@@ -5,6 +5,19 @@
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
+## Contents
+
+- [How Does It Work?](#how-does-it-work)
+    - [Visual Feedback](#visual-feedback)
+    - [Benefits](#benefits)
+- [Quick Start](#quick-start)
+- [Examples](#examples)
+- [Events](#events)
+    - [Event Object](#event-object)
+- [Download](#download)
+
+
+
 ## How Does It Work?
 
 ```js

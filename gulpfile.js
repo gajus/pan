@@ -6,7 +6,8 @@ var pkg = require('./package.json'),
     uglify = require('gulp-uglify'),
     browserify = require('gulp-browserify'),
     fs = require('fs'),
-    del = require('del');
+    del = require('del'),
+    exec = require('child_process').exec;
 
 gulp.task('lint', function () {
     return gulp
@@ -50,8 +51,13 @@ gulp.task('version', ['bundle'], function () {
     fs.writeFile('./bower.json', JSON.stringify(bower, null, 4));
 });
 
+gulp.task('readme', function () {
+    exec('ruby ./.readme/github_toc.rb ./.readme/README.md ./README.md', {cwd: __dirname});
+});
+
 gulp.task('watch', function () {
     gulp.watch(['./src/*', './package.json'], ['default']);
+    gulp.watch('./.readme/README.md', ['readme']);
 });
 
 gulp.task('default', ['version']);
