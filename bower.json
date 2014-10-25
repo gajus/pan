@@ -8,5 +8,8 @@
         "html",
         "mobile"
     ],
-    "license": "BSD-3-Clause"
+    "license": "BSD-3-Clause",
+    "authors": [
+        "Gajus Kuizinas <gk@anuary.com>"
+    ]
 }

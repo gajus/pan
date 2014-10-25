@@ -45,6 +45,7 @@ gulp.task('version', ['bundle'], function () {
     bower.version = pkg.version;
     bower.keywords = pkg.keywords;
     bower.license = pkg.license;
+    bower.authors = [pkg.author];
 
     fs.writeFile('./bower.json', JSON.stringify(bower, null, 4));
 });
