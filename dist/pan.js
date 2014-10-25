@@ -1,32 +1,60 @@
 /**
-* @version 1.1.2
+* @version 1.1.4
 * @link https://github.com/gajus/pan for the canonical source repository
 * @license https://github.com/gajus/pan/blob/master/LICENSE BSD 3-Clause
 */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/**
+* @version 1.0.1
+* @link https://github.com/gajus/sister for the canonical source repository
+* @license https://github.com/gajus/sister/blob/master/LICENSE BSD 3-Clause
+*/
+/**
+* @link https://github.com/gajus/sister for the canonical source repository
+* @license https://github.com/gajus/sister/blob/master/LICENSE BSD 3-Clause
+*/
 function S () {
     if (!(this instanceof S)) {
         return new S();
     }
     this._events = {};
 }
+/**
+ * @name listener
+ * @function
+ * @param {Object} data Event data.
+ */
+
+/**
+ * @param {String} name Event name.
+ * @param {listener} listener
+ */
 S.prototype.on = function (name, listener) {
     this._events[name] = this._events[name] || [];
-    this._events[name].push(listener);
+    this._events[name].unshift(listener);
     return this;
 };
+/**
+ * @param {String} name Event name.
+ * @param {Object} data Event data.
+ */
 S.prototype.trigger = function (name, data) {
-    var i,
-        j;
-    if (this._events[name]) {
-        i = 0;
-        j = this._events[name].length;
-        while (i < j) {
-            this._events[name][i++](data);
+    var listeners = this._events[name],
+        i;
+
+    if (listeners) {
+        i = listeners.length;
+        while (i--) {
+            listeners[i](data);
         }
     }
 };
-module.exports = S;
+
+if (module !== undefined && module.exports) {
+    module.exports = S;
+} else {
+    window.Sister = S;
+}
 },{}],2:[function(require,module,exports){
 (function (global){
 var Sister = require('sister');
