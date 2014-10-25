@@ -18,10 +18,7 @@ Pan.prototype.bind = function (targetElement) {
         pan = this,
         handle,
         positionTracker,
-
-
-        lastDragX,
-        lastDragY,
+        position,
         dragStartSubjectDisplay,
         dragStartSubjectOpacity,
         dragStart,
@@ -43,7 +40,7 @@ Pan.prototype.bind = function (targetElement) {
     };
     
     dragMove = function (e) {
-        var position = positionTracker.update(e);
+        position = positionTracker.update(e);
 
         if (firstMove) {
             // Manipulating (hiding) the targetElement on dragStart is
@@ -77,7 +74,7 @@ Pan.prototype.bind = function (targetElement) {
     };
 
     dragEnd = function (e) {
-        var position = positionTracker.update(e);
+        e.preventDefault();
         
         targetElement.style.display = dragStartSubjectDisplay;
         targetElement.style.opacity = dragStartSubjectOpacity;
