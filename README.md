@@ -1,7 +1,7 @@
 # Pan
 
-[![NPM version](https://badge.fury.io/js/pan.svg)](http://badge.fury.io/js/pan)
-[![Bower version](https://badge.fury.io/bo/pan.svg)](http://badge.fury.io/bo/pan)
+[![NPM version](https://badge.fury.io/js/pan-drag.svg)](http://badge.fury.io/js/pan-drag)
+[![Bower version](https://badge.fury.io/bo/pan.svg?)](http://badge.fury.io/bo/pan)
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
@@ -133,7 +133,7 @@ bower install pan
 Using [NPM](https://www.npmjs.org/):
 
 ```sh
-npm install pan-drag
+npm install pan
 ```
 
 The old-fashioned way, download either of the following files:
