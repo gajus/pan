@@ -19,11 +19,17 @@ This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/ht
 
 [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd) spec does not define a method for styling or animating the handle in response to the drag event, e.g. [there is no way to control element opacity while dragging](http://stackoverflow.com/questions/9712535/html5-drag-and-drop-no-transparency).
 
-To overcome this deficiency, Pan will listen for the `dragstart` event and perform this routine: 
+The following mechanism is used to get full control of the visual feedback:
 
-1. Hide the element that is being dragged.
-2. Make a clone (handle) of the element that is being dragged.
-3. Put the clone in place of the element that is being dragged.
+1. In the event of `dragstart` and `touchstart`:
+1.1. Make a clone (handle) of the target element.
+1.2. Take the target element out of the flow (i.e., hide).
+1.3. Insert the handle element in place of the target element.
+2. In the event of `drag` and `touchmove`:
+1.1. Make a reference to the handle element available to the [event object](#event-object).
+3. In the event of `dragend` and `touchend`:
+3.1. Remove the handle element.
+3.2. Restore the target element.
 
 As a result, you have full control over the visual feedback.
 
