@@ -22,14 +22,14 @@ This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/ht
 The following mechanism is used to get full control of the visual feedback:
 
 1. In the event of `dragstart` and `touchstart`:
-1.1. Make a clone (handle) of the target element.
-1.2. Take the target element out of the flow (i.e., hide).
-1.3. Insert the handle element in place of the target element.
+    1.1. Make a clone (handle) of the target element.
+    1.2. Take the target element out of the flow (i.e., hide).
+    1.3. Insert the handle element in place of the target element.
 2. In the event of `drag` and `touchmove`:
-1.1. Make a reference to the handle element available to the [event object](#event-object).
+    1.1. Make a reference to the handle element available to the [event object](#event-object).
 3. In the event of `dragend` and `touchend`:
-3.1. Remove the handle element.
-3.2. Restore the target element.
+    3.1. Remove the handle element.
+    3.2. Restore the target element.
 
 As a result, you have full control over the visual feedback.
 
