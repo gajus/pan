@@ -30,7 +30,7 @@ This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/ht
 
 [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd) spec does not define a method for styling or animating the handle in response to the drag event, e.g. [there is no way to control element opacity while dragging](http://stackoverflow.com/questions/9712535/html5-drag-and-drop-no-transparency).
 
-The following mechanism is used to get full control of the visual feedback:
+The following mechanism is used to get the full control of the visual feedback:
 
 In the event of `dragstart` and `touchstart`:
 
