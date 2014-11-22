@@ -1,24 +1,17 @@
-# Pan
+<!--
+This file has been generated using GitDown (https://github.com/gajus/gitdown).
+Direct edits to this will be be overwritten. Look for GitDown markup file under ./.gitdown/ path.
+-->
+<h1 id="pan">Pan</h1>
 
-[![NPM version](https://badge.fury.io/js/pan-drag.svg)](http://badge.fury.io/js/pan-drag)
-[![Bower version](https://badge.fury.io/bo/pan.svg?)](http://badge.fury.io/bo/pan)
+[![NPM version](http://img.shields.io/npm/v/pan-drag.svg?style=flat)](https://www.npmjs.org/package/pan-drag)
+[![Bower version](http://img.shields.io/bower/v/pan-drag.svg?style=flat)](http://bower.io/search/?q=pan-drag)
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
-## Contents
+[toc 3]
 
-- [How Does It Work?](#how-does-it-work)
-    - [Visual Feedback](#visual-feedback)
-    - [Benefits](#benefits)
-- [Quick Start](#quick-start)
-    - [Examples](#examples)
-- [Events](#events)
-    - [Event Object](#event-object)
-- [Download](#download)
-
-
-
-## How Does It Work?
+<h2 id="pan-how-does-it-work-">How Does It Work?</h2>
 
 ```js
 new Pan(targetElement);
@@ -26,7 +19,7 @@ new Pan(targetElement);
 
 This will give `targetElement` a [draggable](http://www.w3.org/html/wg/drafts/html/master/editing.html#the-draggable-attribute) property and set an event listener for [dragstart](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragstart), [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-drag) and [dragend](http://www.w3.org/html/wg/drafts/html/master/editing.html#event-dnd-dragend); it will also set an event listener for [touchstart](http://www.w3.org/TR/touch-events/#the-touchstart-event), [touchmove](http://www.w3.org/TR/touch-events/#the-touchmove-event) and [touchend](http://www.w3.org/TR/touch-events/#the-touchend-event). These events are re-emitted through the [`eventEmitter`](#events) and allow you to animate [handle](#visual-feedback) in response to drag/touch events.
 
-### Visual Feedback
+<h3 id="pan-how-does-it-work--visual-feedback">Visual Feedback</h3>
 
 [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd) spec does not define a method for styling or animating the handle in response to the drag event, e.g. [there is no way to control element opacity while dragging](http://stackoverflow.com/questions/9712535/html5-drag-and-drop-no-transparency).
 
@@ -51,12 +44,12 @@ As a result, you have full control over the visual feedback.
 
 There is a reference to the `handle` element in the [Event Object](#event-object).
 
-### Benefits
+<h3 id="pan-how-does-it-work--benefits">Benefits</h3>
 
 * Access to all of the DOM events for [drag](http://www.w3.org/html/wg/drafts/html/master/editing.html#dndevents) and [touch](http://www.w3.org/TR/touch-events/#list-of-touchevent-types).
 * Lightweight and performs good.
 
-## Quick Start
+<h2 id="pan-quick-start">Quick Start</h2>
 
 To make element draggable:
 
@@ -84,7 +77,7 @@ This will make the `#target-element` element draggable using CSS3 transformation
 
 The result of `Pan()` is an object with a single property (`eventEmitter`) used to emit [events](#events).
 
-### Examples
+<h3 id="pan-quick-start-examples">Examples</h3>
 
 * [Basic](http://gajus.com/sandbox/pan/examples/basic/) element dragging using CSS transformations.
 * [Events](http://gajus.com/sandbox/pan/examples/events/) logged in the `console.log`.
@@ -93,7 +86,7 @@ The code for all of the examples is in the [examples](./examples/) folder.
 
 [Raise an issue](https://github.com/gajus/pan/issues) if you are missing an example.
 
-## Events
+<h2 id="pan-events">Events</h2>
 
 You can listen for individual drag and touch [DOM events](#dom-events):
 
@@ -115,7 +108,7 @@ pan.eventEmitter.on('move', dragMove);
 pan.eventEmitter.on('end', dragEnd);
 ```
 
-### Event Object
+<h3 id="pan-events-event-object">Event Object</h3>
 
 The listener of the `eventEmitter` is passed a single `eventObject` object.
 
@@ -133,7 +126,7 @@ pan.eventEmitter.on('move', function (eventObject) {
 | `handle` | Element used to represent the target element when dragging. |
 | `type` | Event name. |
 
-## Download
+<h2 id="pan-download">Download</h2>
 
 Using [Bower](http://bower.io/):
 
