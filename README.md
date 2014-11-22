@@ -4,12 +4,21 @@ Direct edits to this will be be overwritten. Look for GitDown markup file under 
 -->
 <h1 id="pan">Pan</h1>
 
-[![NPM version](http://img.shields.io/npm/v/pan-drag.svg?style=flat)](https://www.npmjs.org/package/pan-drag)
-[![Bower version](http://img.shields.io/bower/v/pan-drag.svg?style=flat)](http://bower.io/search/?q=pan-drag)
+[![NPM version](http://img.shields.io/npm/v/pan.svg?style=flat)](https://www.npmjs.org/package/pan)
+[![Bower version](http://img.shields.io/bower/v/pan.svg?style=flat)](http://bower.io/search/?q=pan)
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
-[toc 3]
+* [Pan](#pan)
+    * [How Does It Work?](#pan-how-does-it-work-)
+        * [Visual Feedback](#pan-how-does-it-work--visual-feedback)
+        * [Benefits](#pan-how-does-it-work--benefits)
+    * [Quick Start](#pan-quick-start)
+        * [Examples](#pan-quick-start-examples)
+    * [Events](#pan-events)
+        * [Event Object](#pan-events-event-object)
+    * [Download](#pan-download)
+
 
 <h2 id="pan-how-does-it-work-">How Does It Work?</h2>
 

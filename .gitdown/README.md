@@ -5,7 +5,7 @@
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
-[toc 3]
+{"gitdown": "contents"}
 
 ## How Does It Work?
 
