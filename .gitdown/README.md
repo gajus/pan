@@ -135,10 +135,5 @@ bower install pan
 Using [NPM](https://www.npmjs.org/):
 
 ```sh
-npm install pan-drag
+npm install pan
 ```
-
-The old-fashioned way, download either of the following files:
-
-* https://raw.githubusercontent.com/gajus/pan/master/dist/pan.js
-* https://raw.githubusercontent.com/gajus/pan/master/dist/pan.min.js
