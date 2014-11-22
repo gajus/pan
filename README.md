@@ -9,7 +9,10 @@ Direct edits to this will be be overwritten. Look for GitDown markup file under 
 
 Touch enabled implementation of [WHATWG](https://html.spec.whatwg.org/#dnd) drag and drop (aka [HTML drag and drop](http://www.w3.org/html/wg/drafts/html/master/editing.html#dnd)) mechanism.
 
+<h2 id="pan-contents">Contents</h2>
+
 * [Pan](#pan)
+    * [Contents](#pan-contents)
     * [How Does It Work?](#pan-how-does-it-work-)
         * [Visual Feedback](#pan-how-does-it-work--visual-feedback)
         * [Benefits](#pan-how-does-it-work--benefits)

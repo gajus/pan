@@ -1,5 +1,5 @@
 /**
- * @version 1.1.5
+ * @version 1.1.6
  * @link https://github.com/gajus/pan for the canonical source repository
  * @license https://github.com/gajus/pan/blob/master/LICENSE BSD 3-Clause
  */
